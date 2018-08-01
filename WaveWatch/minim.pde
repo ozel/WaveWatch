@@ -11,6 +11,10 @@ class WaveformRenderer implements AudioListener
 
   synchronized void samples(float[] samp)
   {
+    if(monostereo==false){
+      print("mono signal, duplicated on ChB");
+      Rdisplay=false;
+    }
     samples(samp, samp);
   }
 
@@ -49,7 +53,7 @@ class WaveformRenderer implements AudioListener
               if (once) stopped=true;
             }
             
-            // Alignment
+            // Alignment (do voltage calibration)
             if (alignment) {
               float minlvl1=10;
               float maxlvl1=-10;

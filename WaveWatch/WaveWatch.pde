@@ -55,15 +55,15 @@ PrintWriter output;
 PImage splash;
 
 // Status and Trig
-boolean trig_en = false;
+boolean trig_en = true;
 boolean trig_dir = true;
 boolean trigged = false;
 boolean stopped = false;
 boolean once = false;
-float triglevel = 0.000;
+float triglevel = 0.0000;
 int trigdelta=256;
 boolean trigin = false;
-boolean alignment=false;
+boolean alignment=false; //safe voltage.tsv file as calibration
 int started=0;
 
 // Measurement
@@ -82,8 +82,11 @@ float gain2 = 200;
 float[] tbase_list = {
   0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500
 };
+
+int sampel_freq = 192000; //sample frequency in Hz. if too high, try 96000 or 44100 
+
 int i_tbase = 4;
-float tbase = tbase_list[i_tbase]*44100/40000;
+float tbase = tbase_list[i_tbase]*sampel_freq/40000;
 
 // Frequency Calculation 
 float freq1 = 0;
@@ -100,7 +103,7 @@ boolean Ldisplay=true;
 // Signal Right
 float[] display21;
 float[] r_buffer;
-boolean Rdisplay=true;
+boolean Rdisplay=false;
 
 float display=1;
 
@@ -128,8 +131,9 @@ void setup()
   splash = loadImage("data/splash.jpg");
 
   minim = new Minim(this);
-  in = minim.getLineIn(Minim.STEREO, A_Buffer, 44100);
-
+  // in = minim.getLineIn(Minim.STEREO), A_Buffer, 44100);
+  in = minim.getLineIn(Minim.MONO, A_Buffer, sampel_freq);
+  
   waveform = new WaveformRenderer();
   in.addListener( waveform );
 

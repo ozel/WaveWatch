@@ -85,11 +85,11 @@ void mousePressed()
     }   
     if ((mouseX>392)&&(mouseX<432)) {
       if (i_tbase<14) i_tbase=i_tbase+1;
-      tbase = tbase_list[i_tbase]*44100/40000;
+      tbase = tbase_list[i_tbase]*sampel_freq/40000;
     }       
     if ((mouseX>432)&&(mouseX<476)) {
       if (i_tbase>0) i_tbase=i_tbase-1;
-      tbase = tbase_list[i_tbase]*44100/40000;
+      tbase = tbase_list[i_tbase]*sampel_freq/40000;
     }
     if ((mouseX>752)&&(mouseX<792)) {
       if (once) {
@@ -166,11 +166,11 @@ void keyPressed()
     break;
   case 'c': 
     if (i_tbase>0) i_tbase=i_tbase-1;
-    tbase = tbase_list[i_tbase]*44100/40000;
+    tbase = tbase_list[i_tbase]*sampel_freq/40000;
     break;
   case 'v': 
     if (i_tbase<14) i_tbase=i_tbase+1;
-    tbase = tbase_list[i_tbase]*44100/40000;
+    tbase = tbase_list[i_tbase]*sampel_freq/40000;
     break;
   case 'g': 
     triglevel =  triglevel-0.01;
